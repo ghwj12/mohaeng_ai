@@ -3,7 +3,7 @@ from fastapi import APIRouter, UploadFile, File, Form, Depends
 from fastapi.responses import JSONResponse
 from typing import Optional
 
-from app.core.security import require_internal_api_key
+from app.core.security import verify_api_key as require_internal_api_key
 from app.schemas.reco_schema import RecommendRequest, EmbeddingRequest, EmbeddingResponse
 from app.services import reco_service
 
