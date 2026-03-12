@@ -10,7 +10,8 @@ GOOGLE_PLACES_KEY = os.getenv("GOOGLE_PLACES_API_KEY", "")
 KAKAO_REST_KEY    = os.getenv("KAKAO_REST_API_KEY", "")
 
 DRIVE_15MIN_RADIUS   = 12000  # 차로 15분 ≒ 12km
-TRANSIT_30MIN_RADIUS =  6000  # 대중교통 30분 ≒ 6km
+TRANSIT_15MIN_RADIUS =  5000  # 버스/도보 15분 ≒ 5km
+TRANSIT_FALLBACK_RADIUS = 10000  # 주변에 없을 때 확장 반경
 
 def get_season_info(date_str: Optional[str]) -> str:
     """행사 날짜로 계절 + 날씨 특성 반환"""
@@ -166,14 +167,26 @@ async def generate_travel_course(req: NearbyRequest) -> NearbyResponse:
     import asyncio
 
     # 이동 수단에 따라 반경 결정
-    radius = TRANSIT_30MIN_RADIUS if req.transport == "도보" else DRIVE_15MIN_RADIUS
+    radius = TRANSIT_15MIN_RADIUS if req.transport == "도보" else DRIVE_15MIN_RADIUS
 
-    # 구글에서 별점 기반 수집 (카페 1개, 맛집 최대 3개, 관광 최대 4개)
+    # 구글에서 별점 기반 수집
     restaurants_raw, cafes_raw, attractions_raw = await asyncio.gather(
         search_google_places("맛집 음식점", "restaurant",        req.latitude, req.longitude, radius=radius, limit=6),
         search_google_places("카페",        "cafe",              req.latitude, req.longitude, radius=radius, limit=3),
         search_google_places("관광지 명소", "tourist_attraction", req.latitude, req.longitude, radius=radius, limit=5),
     )
+
+    # 도보 모드에서 결과가 너무 적으면 반경 확장해서 재검색
+    if req.transport == "도보":
+        if len(restaurants_raw) < 2:
+            print(f"[반경 확장] 맛집 부족({len(restaurants_raw)}개) → {TRANSIT_FALLBACK_RADIUS//1000}km로 재검색")
+            restaurants_raw = await search_google_places("맛집 음식점", "restaurant", req.latitude, req.longitude, radius=TRANSIT_FALLBACK_RADIUS, limit=6)
+        if len(cafes_raw) < 1:
+            print(f"[반경 확장] 카페 부족({len(cafes_raw)}개) → {TRANSIT_FALLBACK_RADIUS//1000}km로 재검색")
+            cafes_raw = await search_google_places("카페", "cafe", req.latitude, req.longitude, radius=TRANSIT_FALLBACK_RADIUS, limit=3)
+        if len(attractions_raw) < 1:
+            print(f"[반경 확장] 관광지 부족({len(attractions_raw)}개) → {TRANSIT_FALLBACK_RADIUS//1000}km로 재검색")
+            attractions_raw = await search_google_places("관광지 명소", "tourist_attraction", req.latitude, req.longitude, radius=TRANSIT_FALLBACK_RADIUS, limit=5)
 
     # 카카오 상세 URL 일괄 주입
     restaurants, cafes, attractions = await asyncio.gather(
