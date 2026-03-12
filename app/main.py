@@ -4,6 +4,7 @@ from app.api import reco_router
 from app.api import image_router
 from app.api import nearby_router
 from app.api.chat_router import router as chat_router
+from app.api import biz_router
 
 app = FastAPI(title="MOHAENG AI")
 
@@ -19,3 +20,4 @@ app.include_router(reco_router.router)
 app.include_router(image_router.router)
 app.include_router(chat_router)
 app.include_router(nearby_router.router)
+app.include_router(biz_router.router)
