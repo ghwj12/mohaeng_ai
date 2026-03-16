@@ -205,7 +205,7 @@ def suggest_tags(title: str, simple_explain: str, image_bytes: bytes = None) -> 
     category_name = CATEGORIES[cat_idx]["name"]
 
     # ── 주제
-    TOPIC_THRESHOLD = 0.3
+    TOPIC_THRESHOLD = 0.5
     topic_sims = util.cos_sim(query_vec, _get_topic_embeddings())[0]
     topic_scores = sorted(
         [(float(topic_sims[i].item()), TOPICS[i]) for i in range(len(TOPICS))],
@@ -213,7 +213,7 @@ def suggest_tags(title: str, simple_explain: str, image_bytes: bytes = None) -> 
     )
     topic_ids = [t["id"] for score, t in topic_scores if score >= TOPIC_THRESHOLD][:5]
     if not topic_ids:
-        topic_ids = [t["id"] for score, t in topic_scores][:3]
+        topic_ids = [25]  # 기타 id
 
     # ── 해시태그
     HASHTAG_THRESHOLD = 0.4
