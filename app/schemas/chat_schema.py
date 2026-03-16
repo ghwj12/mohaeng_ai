@@ -1,5 +1,5 @@
 from pydantic import BaseModel, Field
-from typing import List, Optional
+from typing import Any, List, Optional
 
 
 class ChatHistoryItem(BaseModel):
@@ -11,6 +11,12 @@ class ChatRequest(BaseModel):
     message: str = Field(..., min_length=1)
     authorization: Optional[str] = None
     history: List[ChatHistoryItem] = []
+    sessionId: Optional[str] = None
+    pageType: Optional[str] = None
+    contextPage: Optional[str] = None
+    region: Optional[str] = None
+    locationKeywords: List[str] = []
+    filters: Optional[dict[str, Any]] = None
 
 
 class ChatCard(BaseModel):
