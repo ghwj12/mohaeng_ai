@@ -25,6 +25,14 @@ class ChatbotService:
             '예) 관리자 문의: 결제가 됐는데 신청 내역이 안 보여요'
         )
 
+    def _login_issue_email_guide(self) -> str:
+        return (
+            '로그인 문제는 관리자 문의로 바로 접수할 수 없어요. '
+            '관리자 문의는 로그인한 상태에서만 접수돼요. '
+            '로그인 자체가 되지 않으면 관리자 이메일 mohaeng8826@gmail.com 으로 '
+            '상황을 보내 주세요.'
+        )
+
     async def chat(
         self,
         *,
@@ -43,7 +51,10 @@ class ChatbotService:
 
             if lowered.startswith('관리자 문의:') or lowered.startswith('관리자문의:'):
                 if not authorization:
-                    reply = '관리자 문의는 로그인한 상태에서만 접수할 수 있어요. 로그인 후 다시 보내주세요.'
+                    if any(keyword in raw_message for keyword in ['로그인', '비밀번호', '비번']):
+                        reply = self._login_issue_email_guide()
+                    else:
+                        reply = '관리자 문의는 로그인한 상태에서만 접수할 수 있어요. 로그인 후 다시 보내주세요.'
                     self.admin_support.save_log(
                         question=raw_message,
                         answer=reply,
@@ -63,12 +74,18 @@ class ChatbotService:
                     )
                     return ChatResponse(answer=reply, cards=[], intent='admin_contact')
 
-                self.admin_support.save_contact(
-                    content=content,
+                submitted = await self.spring.submit_admin_contact(
                     session_id=session_id,
+                    content=content,
                     authorization=authorization,
                 )
-                reply = '관리자 문의가 접수되었어요. 확인 후 답변드릴게요.'
+                if not submitted:
+                    self.admin_support.save_contact(
+                        content=content,
+                        session_id=session_id,
+                        authorization=authorization,
+                    )
+                reply = '관리자 문의가 접수되었어요. 답변은 마이페이지 > 문의 내역 > AI 문의에서 확인할 수 있어요.'
                 self.admin_support.save_log(
                     question=raw_message,
                     answer=reply,
@@ -79,7 +96,10 @@ class ChatbotService:
 
             if '관리자' in raw_message and '문의' in raw_message:
                 if not authorization:
-                    reply = '관리자 문의는 로그인한 상태에서만 접수할 수 있어요. 로그인 후 다시 이용해주세요.'
+                    if any(keyword in raw_message for keyword in ['로그인', '비밀번호', '비번']):
+                        reply = self._login_issue_email_guide()
+                    else:
+                        reply = '관리자 문의는 로그인한 상태에서만 접수할 수 있어요. 로그인 후 다시 이용해주세요.'
                 else:
                     reply = self._admin_contact_prompt()
                 self.admin_support.save_log(

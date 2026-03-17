@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from pydantic import BaseModel
 
 from app.core.security import verify_api_key
@@ -10,22 +10,52 @@ router = APIRouter(prefix='/ai/admin', tags=['AI Admin'], dependencies=[Depends(
 admin_support = AdminSupportService()
 
 
-class ContactAnswerRequest(BaseModel):
-    answer: str
-    status: str = '답변완료'
+class ContactUpdateRequest(BaseModel):
+    answer: str | None = None
+    status: str | None = None
+    assignee: str | None = None
+    category: str | None = None
+    priority: str | None = None
+    memo: str | None = None
 
 
 @router.get('/contacts')
 async def list_contacts(limit: int = 100):
-    return {
-        'items': admin_support.list_contacts(limit=limit),
-    }
+    return {'items': admin_support.list_contacts(limit=limit)}
 
 
 @router.put('/contacts/{item_id}')
-async def answer_contact(item_id: str, req: ContactAnswerRequest):
-    updated = admin_support.answer_contact(item_id=item_id, answer=req.answer, status=req.status)
-    return updated or {'message': 'not_found'}
+async def update_contact(item_id: str, req: ContactUpdateRequest):
+    updated = admin_support.update_contact(
+        item_id=item_id,
+        answer=req.answer,
+        status=req.status,
+        assignee=req.assignee,
+        category=req.category,
+        priority=req.priority,
+        memo=req.memo,
+        actor=req.assignee or '관리자',
+    )
+    if not updated:
+        raise HTTPException(status_code=404, detail='contact_not_found')
+    return updated
+
+
+@router.delete('/contacts/{item_id}')
+async def delete_contact(item_id: str):
+    deleted = admin_support.delete_contact(item_id=item_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail='contact_not_found')
+    return {'ok': True, 'itemId': item_id}
+
+
+
+@router.post('/contacts/{item_id}/delete')
+async def delete_contact_post(item_id: str):
+    deleted = admin_support.delete_contact(item_id=item_id)
+    if not deleted:
+        raise HTTPException(status_code=404, detail='contact_not_found')
+    return {'ok': True, 'itemId': item_id}
 
 
 @router.get('/logs')
