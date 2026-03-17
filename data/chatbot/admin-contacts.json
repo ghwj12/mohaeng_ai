@@ -1,30 +1,262 @@
 [
   {
-    "id": "688370d9-8b09-420b-a3d0-76fd4687012f",
-    "content": "결제가 됐는데 신청 내역이 안 보여요",
+    "id": "e37f3637-844a-421d-994a-a3f71ef34d99",
+    "content": "행사 등록 후 수정이 되지 않습니다.\n관리자 확인 부탁드립니다.",
     "status": "대기",
-    "createdAt": "2026-03-12T16:10:22+09:00",
-    "sessionId": "",
+    "createdAt": "2026-03-17T12:24:02+09:00",
+    "updatedAt": "2026-03-17T12:24:02+09:00",
+    "sessionId": "auto_cfb3ae8908a3482fb01b",
     "hasAuthorization": true,
     "source": "chatbot",
-    "answer": ""
+    "answer": "",
+    "assignee": "",
+    "category": "회원 문의",
+    "priority": "보통",
+    "history": [
+      {
+        "id": "1f3bc31cdf6c49b9a0198b706f8c826d",
+        "action": "접수",
+        "actor": "AI 챗봇",
+        "createdAt": "2026-03-17T12:24:02+09:00",
+        "changes": {
+          "status": "대기"
+        }
+      }
+    ],
+    "answeredAt": ""
   },
   {
-    "id": "0ee65756-1e1e-41b2-b36a-e5ee520559ff",
-    "content": "결제가 됐는데 신청 내역이 안 보여요",
+    "id": "1a73e380-4e25-4ff9-8273-4293680c9da5",
+    "content": "결제는 완료됐는데 참여 상태가 반영되지 않아 확인 요청드립니다.",
     "status": "대기",
-    "createdAt": "2026-03-12T15:54:01+09:00",
-    "sessionId": "",
+    "createdAt": "2026-03-17T12:23:50+09:00",
+    "updatedAt": "2026-03-17T12:23:50+09:00",
+    "sessionId": "auto_a68513260b054cfb8764",
     "hasAuthorization": true,
-    "source": "chatbot"
+    "source": "chatbot",
+    "answer": "",
+    "assignee": "",
+    "category": "회원 문의",
+    "priority": "보통",
+    "history": [
+      {
+        "id": "36c879406caa48cab8598e053c2b5a71",
+        "action": "접수",
+        "actor": "AI 챗봇",
+        "createdAt": "2026-03-17T12:23:50+09:00",
+        "changes": {
+          "status": "대기"
+        }
+      }
+    ],
+    "answeredAt": ""
   },
   {
-    "id": 1773296316660,
-    "createdAt": "2026-03-12T15:18:36",
-    "sessionId": "sess_1773191913444_yt0kkp6c",
-    "authorization": "Bearer eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxIiwicm9sZSI6IlJPTEVf",
-    "message": "결제가 됐는데 신청 내역이 안 보여요",
+    "id": "3a1af358-887f-4f94-9ae1-583950d13038",
+    "content": "관심 행사 목록에서 알림 기능이 있었으면 좋겠습니다.",
     "status": "대기",
-    "answer": ""
+    "createdAt": "2026-03-17T12:23:38+09:00",
+    "updatedAt": "2026-03-17T12:23:38+09:00",
+    "sessionId": "auto_98d6779e3f1d4f14aebe",
+    "hasAuthorization": true,
+    "source": "chatbot",
+    "answer": "",
+    "assignee": "",
+    "category": "회원 문의",
+    "priority": "보통",
+    "history": [
+      {
+        "id": "eb37ad2a07f345b18b9c1dc1896fb0fc",
+        "action": "접수",
+        "actor": "AI 챗봇",
+        "createdAt": "2026-03-17T12:23:38+09:00",
+        "changes": {
+          "status": "대기"
+        }
+      }
+    ],
+    "answeredAt": ""
+  },
+  {
+    "id": "e61764d6-7e7c-4587-b8db-aa52f2231d68",
+    "content": "페이지 이동 중에 500 오류가 발생합니다.\n특정 행사 상세 페이지에서 계속 오류가 납니다.",
+    "status": "대기",
+    "createdAt": "2026-03-17T12:23:26+09:00",
+    "updatedAt": "2026-03-17T12:23:26+09:00",
+    "sessionId": "auto_cf9e3779ef80486e886f",
+    "hasAuthorization": true,
+    "source": "chatbot",
+    "answer": "",
+    "assignee": "",
+    "category": "회원 문의",
+    "priority": "보통",
+    "history": [
+      {
+        "id": "29cbb34f7d724c5a8cfabb0e6fff4de4",
+        "action": "접수",
+        "actor": "AI 챗봇",
+        "createdAt": "2026-03-17T12:23:26+09:00",
+        "changes": {
+          "status": "대기"
+        }
+      }
+    ],
+    "answeredAt": ""
+  },
+  {
+    "id": "85a28f18-546d-4dc7-b12b-54ea77584f10",
+    "content": "이미지가 안 보이고 깨져서 나옵니다.",
+    "status": "대기",
+    "createdAt": "2026-03-17T12:23:16+09:00",
+    "updatedAt": "2026-03-17T12:23:16+09:00",
+    "sessionId": "auto_bb210dc468b041818bf1",
+    "hasAuthorization": true,
+    "source": "chatbot",
+    "answer": "",
+    "assignee": "",
+    "category": "회원 문의",
+    "priority": "보통",
+    "history": [
+      {
+        "id": "b52db6dbc92641b8b67006d64f533c55",
+        "action": "접수",
+        "actor": "AI 챗봇",
+        "createdAt": "2026-03-17T12:23:16+09:00",
+        "changes": {
+          "status": "대기"
+        }
+      }
+    ],
+    "answeredAt": ""
+  },
+  {
+    "id": "044ad405-fa06-4209-9763-e4a0cabbbfd9",
+    "content": "문의 글을 작성했는데 등록이 안 된 것 같습니다.\n확인 부탁드립니다.",
+    "status": "대기",
+    "createdAt": "2026-03-17T12:22:50+09:00",
+    "updatedAt": "2026-03-17T12:22:50+09:00",
+    "sessionId": "auto_92236f27d1fe4de6adcb",
+    "hasAuthorization": true,
+    "source": "chatbot",
+    "answer": "",
+    "assignee": "",
+    "category": "회원 문의",
+    "priority": "보통",
+    "history": [
+      {
+        "id": "9a24bfc3b4224a7e928cc34c5b6e5b14",
+        "action": "접수",
+        "actor": "AI 챗봇",
+        "createdAt": "2026-03-17T12:22:50+09:00",
+        "changes": {
+          "status": "대기"
+        }
+      }
+    ],
+    "answeredAt": ""
+  },
+  {
+    "id": "13d5b7ab-4f5f-4334-b8bd-dd9398a70353",
+    "content": "행사 신청을 했는데 승인 여부는 어디서 확인하나요?",
+    "status": "대기",
+    "createdAt": "2026-03-17T12:22:38+09:00",
+    "updatedAt": "2026-03-17T12:22:38+09:00",
+    "sessionId": "auto_25575ad87f2c4229ba13",
+    "hasAuthorization": true,
+    "source": "chatbot",
+    "answer": "",
+    "assignee": "",
+    "category": "회원 문의",
+    "priority": "보통",
+    "history": [
+      {
+        "id": "64e43ab5dee946009ad341c4f93d9b2d",
+        "action": "접수",
+        "actor": "AI 챗봇",
+        "createdAt": "2026-03-17T12:22:38+09:00",
+        "changes": {
+          "status": "대기"
+        }
+      }
+    ],
+    "answeredAt": ""
+  },
+  {
+    "id": "755ac2bf-47b3-48a8-819d-2110fc884a18",
+    "content": "행사 신청 버튼이 눌리지 않습니다.\n모집 중인데도 신청이 안 됩니다.",
+    "status": "대기",
+    "createdAt": "2026-03-17T12:22:26+09:00",
+    "updatedAt": "2026-03-17T12:22:26+09:00",
+    "sessionId": "auto_835d4bf3dcf44a11a83c",
+    "hasAuthorization": true,
+    "source": "chatbot",
+    "answer": "",
+    "assignee": "",
+    "category": "회원 문의",
+    "priority": "보통",
+    "history": [
+      {
+        "id": "7834edfb86f642acb915ab18f93b07e3",
+        "action": "접수",
+        "actor": "AI 챗봇",
+        "createdAt": "2026-03-17T12:22:26+09:00",
+        "changes": {
+          "status": "대기"
+        }
+      }
+    ],
+    "answeredAt": ""
+  },
+  {
+    "id": "314ab3be-96d4-4a72-a21f-64300be17d4d",
+    "content": "결제 취소를 했는데 환불이 언제 처리되는지 알고 싶습니다.\n카드 결제 기준으로 며칠 걸리나요?",
+    "status": "대기",
+    "createdAt": "2026-03-17T12:22:10+09:00",
+    "updatedAt": "2026-03-17T12:22:10+09:00",
+    "sessionId": "auto_627c7699489b46508c00",
+    "hasAuthorization": true,
+    "source": "chatbot",
+    "answer": "",
+    "assignee": "",
+    "category": "회원 문의",
+    "priority": "보통",
+    "history": [
+      {
+        "id": "b50cff8365de4fcb95a18646eab180d8",
+        "action": "접수",
+        "actor": "AI 챗봇",
+        "createdAt": "2026-03-17T12:22:10+09:00",
+        "changes": {
+          "status": "대기"
+        }
+      }
+    ],
+    "answeredAt": ""
+  },
+  {
+    "id": "a9377593-b9df-463e-b1a4-5298ceec009c",
+    "content": "3월 17일 행사 결제를 완료했는데 마이페이지에 참여 내역이 없습니다.\n결제는 정상적으로 됐는데 확인 부탁드립니다.",
+    "status": "대기",
+    "createdAt": "2026-03-17T12:21:53+09:00",
+    "updatedAt": "2026-03-17T12:21:53+09:00",
+    "sessionId": "auto_1f9fba92487546e5934f",
+    "hasAuthorization": true,
+    "source": "chatbot",
+    "answer": "",
+    "assignee": "",
+    "category": "회원 문의",
+    "priority": "보통",
+    "history": [
+      {
+        "id": "63d5141c09a84636aa1d0ed20f97af62",
+        "action": "접수",
+        "actor": "AI 챗봇",
+        "createdAt": "2026-03-17T12:21:53+09:00",
+        "changes": {
+          "status": "대기"
+        }
+      }
+    ],
+    "answeredAt": ""
   }
 ]
