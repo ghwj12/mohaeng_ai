@@ -98,8 +98,37 @@ class AdminSupportService:
         self._write_json(LOGS_PATH, items[:1000])
         return row
 
+    def _normalize_admin_contact_question(self, question: str) -> str:
+        text = (question or '').strip()
+        prefixes = ['관리자 문의:', '관리자문의:']
+        for prefix in prefixes:
+            if text.startswith(prefix):
+                return text.split(':', 1)[1].strip()
+        return text
+
+    def _enrich_log_session_ids(self, logs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+        contacts = self._read_json(CONTACTS_PATH)
+        contact_session_map: dict[str, str] = {}
+        for contact in contacts:
+            key = (contact.get('content') or '').strip()
+            session_id = (contact.get('sessionId') or '').strip()
+            if key and session_id and key not in contact_session_map:
+                contact_session_map[key] = session_id
+
+        enriched: list[dict[str, Any]] = []
+        for log in logs:
+            item = dict(log)
+            if not (item.get('sessionId') or '').strip():
+                question_key = self._normalize_admin_contact_question(item.get('question') or '')
+                session_id = contact_session_map.get(question_key, '')
+                if session_id:
+                    item['sessionId'] = session_id
+            enriched.append(item)
+        return enriched
+
     def list_logs(self, *, limit: int = 150) -> list[dict[str, Any]]:
-        return self._read_json(LOGS_PATH)[: max(1, min(limit, 1000))]
+        items = self._read_json(LOGS_PATH)[: max(1, min(limit, 1000))]
+        return self._enrich_log_session_ids(items)
 
     def summarize_logs(self) -> dict[str, Any]:
         items = self._read_json(LOGS_PATH)
